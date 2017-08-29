@@ -29,7 +29,7 @@ class TestApp(wx.App):
         for pair in values:
             label, value = pair.split(":")
             label = "{}\n{}".format(label, value)
-            bgcol  = (100+rand(0, 100),100+rand(0, 100),100+rand(0, 100))
+            bgcol  = (100+rand(0, 150),100+rand(0, 150),100+rand(0, 150))
             nodes.append(Node(label, float(value), [], bgcol))
         return Node("Total" , sum([x.size for x in nodes]), nodes, (0, 240, 0))
 
