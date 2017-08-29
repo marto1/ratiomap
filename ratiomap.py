@@ -1,5 +1,10 @@
-import wx, sys, os, logging, operator
-from squaremap.squaremap import SquareMap
+import wx, sys
+from squaremap.squaremap import SquareMap, DefaultAdapter
+from random import randint as rand
+
+class RatioMapAdapter(DefaultAdapter):
+    def background_color(self, node, depth):
+        return node.bgcolor #only 1 layer deep
 
 class TestApp(wx.App):
     """Application to view ratios as a SquareMap"""
@@ -8,7 +13,12 @@ class TestApp(wx.App):
         wx.InitAllImageHandlers()
         self.frame = frame = wx.Frame(None)
         model = self.get_model(sys.argv[1:])
-        self.sq = SquareMap(frame, model=model)
+        self.sq = SquareMap(
+            frame,
+            model=model,
+            square_style = True,
+            adapter = RatioMapAdapter(),
+        )
         frame.Show(True)
         self.SetTopWindow(frame)
         return True
@@ -18,15 +28,18 @@ class TestApp(wx.App):
         nodes = []
         for pair in values:
             label, value = pair.split(":")
-            nodes.append(Node(label, float(value), []))
-        return Node("Total" , sum([x.size for x in nodes]), nodes )
-
+            label = "{}\n{}".format(label, value)
+            bgcol  = (100+rand(0, 100),100+rand(0, 100),100+rand(0, 100))
+            nodes.append(Node(label, float(value), [], bgcol))
+        return Node("Total" , sum([x.size for x in nodes]), nodes, (0, 240, 0))
 
 class Node(object):
-    def __init__(self, path, size, children):
+    def __init__(self, path, size, children, bgcolor):
         self.path = path
         self.size = size
         self.children = children
+        self.bgcolor = bgcolor
+
     def __repr__(self):
         return '%s( %r, %r, %r )'%( self.__class__.__name__, self.path, self.size, self.children )
 
