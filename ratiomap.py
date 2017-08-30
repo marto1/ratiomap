@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import wx, sys
 from squaremap.squaremap import SquareMap, DefaultAdapter
 from random import randint as rand
