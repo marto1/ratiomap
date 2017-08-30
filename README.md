@@ -9,4 +9,5 @@ Example:
 `python ratiomap.py Petrolium:56 "Petrolium Gases:4.6" Gold:1.7 Radioactive:3.9 Ferroalloys:3.2 Copper:3.8 Silver:0.67 Iron:2.3`
 
 
-![example image](URL https://raw.githubusercontent.com/marto1/ratiomap/master/example.png)
+
+![Alt Text](https://raw.githubusercontent.com/marto1/ratiomap/master/example.png)
